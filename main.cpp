@@ -487,92 +487,82 @@ void edytujKontakt(vector <KsiazkaAdresowa>&adresaci) {
     }
 }
 
-int menuUzytkownika(vector<Uzytkownik>&uzytkownicy) {
-    int liczbaUzytkownikow,idZalogowanegoUzytkownika;
-    wczytywanieUzytkownikow(uzytkownicy);
-    char wybor='0';
-    while(true) {
-
-        system("cls");
-        cout<<"Witaj w Twojej ksiazce adresowej!"<<endl;
-        cout<<"1. Logowanie"<<endl;
-        cout<<"2. Rejestracja"<<endl;
-        cout<<"9. Zakoncz program"<<endl;
-        cout<<"ID zalogowanego uzytkownika:"<<idZalogowanegoUzytkownika<<endl;
-        cout<<"Twoj wybor: ";
-        cin>>wybor;
-        switch(wybor) {
-        case '1':
-            idZalogowanegoUzytkownika=logowanieUzytkownika(uzytkownicy);
-            return idZalogowanegoUzytkownika;
-            break;
-        case '2':
-            liczbaUzytkownikow=rejestracjaUzytkownika(uzytkownicy);
-            break;
-        case '9':
-            cout<<"Do zobaczenia!"<<endl;
-            exit(0);
-            break;
-        }
-    }
-
-}
-
 int main() {
     vector<Uzytkownik>uzytkownicy;
     vector <KsiazkaAdresowa>adresaci;
     int idZalogowanegoUzytkownika=0,liczbaZapisanychAdresow=0;
     while(true) {
+        wczytywanieUzytkownikow(uzytkownicy);
+        int liczbaUzytkownikow;
+        char wybor;
         if(idZalogowanegoUzytkownika==0) {
-            idZalogowanegoUzytkownika=menuUzytkownika(uzytkownicy);
+            system("cls");
+            cout<<"Witaj w Twojej ksiazce adresowej!"<<endl;
+            cout<<"1. Logowanie"<<endl;
+            cout<<"2. Rejestracja"<<endl;
+            cout<<"9. Zakoncz program"<<endl;
+            cout<<"ID zalogowanego uzytkownika:"<<idZalogowanegoUzytkownika<<endl;
+            cout<<"Twoj wybor: ";
+            cin>>wybor;
+            switch(wybor) {
+            case '1':
+                idZalogowanegoUzytkownika=logowanieUzytkownika(uzytkownicy);
+                break;
+            case '2':
+                liczbaUzytkownikow=rejestracjaUzytkownika(uzytkownicy);
+                break;
+            case '9':
+                cout<<"Do zobaczenia!"<<endl;
+                exit(0);
+                break;
+            }
         } else {
             wczytywanieKsiazkiAdresowejUzytkownika(adresaci,idZalogowanegoUzytkownika);
             liczbaZapisanychAdresow=adresaci.size();
             char wybor;
-            while(true) {
 
-                system("cls");
-                cout<<"1. Dodaj Adresata"<<endl;
-                cout<<"2. Wyszukiwanie po Imieniu"<<endl;
-                cout<<"3. Wyszukiwanie po Nazwisku"<<endl;
-                cout<<"4. Wyswietl wszystkie kontakty"<<endl;
-                cout<<"5. Usun adresata"<<endl;
-                cout<<"6. Edytuj adresata"<<endl;
-                cout<<"7. Zmiana hasla"<<endl;
-                cout<<"8. Wyloguj sie"<<endl;
-                cout<<"9. Zakoncz program"<<endl;
-                cout<<"Twoj wybor: ";
-                cin>>wybor;
-                switch(wybor) {
-                case '1':
-                    dodajKontakt(adresaci,idZalogowanegoUzytkownika);
-                    break;
-                case '2':
-                    wyszukajKontaktpoImieniu(adresaci);
-                    break;
-                case '3':
-                    wyszukajKontaktpoNazwisku(adresaci);
-                    break;
-                case '4':
-                    wyswietlKontakty(adresaci,idZalogowanegoUzytkownika);
-                    break;
-                case '5':
-                    liczbaZapisanychAdresow=usunKontakt(adresaci);
-                    break;
-                case '6':
-                    edytujKontakt(adresaci);
-                    break;
-                case '7':
-                    zmianaHasla(uzytkownicy,idZalogowanegoUzytkownika);
-                    break;
-                case '8':
-                    menuUzytkownika(uzytkownicy);
-                    break;
-                case '9':
-                    cout<<"Do zobaczenia!"<<endl;
-                    exit(0);
-                    break;
-                }
+            system("cls");
+            cout<<"1. Dodaj Adresata"<<endl;
+            cout<<"2. Wyszukiwanie po Imieniu"<<endl;
+            cout<<"3. Wyszukiwanie po Nazwisku"<<endl;
+            cout<<"4. Wyswietl wszystkie kontakty"<<endl;
+            cout<<"5. Usun adresata"<<endl;
+            cout<<"6. Edytuj adresata"<<endl;
+            cout<<"7. Zmiana hasla"<<endl;
+            cout<<"8. Wyloguj sie"<<endl;
+            cout<<"9. Zakoncz program"<<endl;
+            cout<<"ID uzytkownika: "<<idZalogowanegoUzytkownika<<endl;
+            cout<<"Twoj wybor: ";
+            cin>>wybor;
+            switch(wybor) {
+            case '1':
+                dodajKontakt(adresaci,idZalogowanegoUzytkownika);
+                break;
+            case '2':
+                wyszukajKontaktpoImieniu(adresaci);
+                break;
+            case '3':
+                wyszukajKontaktpoNazwisku(adresaci);
+                break;
+            case '4':
+                wyswietlKontakty(adresaci,idZalogowanegoUzytkownika);
+                break;
+            case '5':
+                liczbaZapisanychAdresow=usunKontakt(adresaci);
+                break;
+            case '6':
+                edytujKontakt(adresaci);
+                break;
+            case '7':
+                zmianaHasla(uzytkownicy,idZalogowanegoUzytkownika);
+                break;
+            case '8':
+                idZalogowanegoUzytkownika=0;
+                break;
+            case '9':
+                cout<<"Do zobaczenia!"<<endl;
+                exit(0);
+                break;
             }
         }
     }
