@@ -115,7 +115,7 @@ int logowanieUzytkownika(vector<Uzytkownik>&uzytkownicy) {
     Sleep(1500);
     return 0;
 }
-*/
+
 void zmianaHasla(vector<Uzytkownik>&uzytkownicy,int idZalogowanegoUzytkownika) {
     system ("cls");
     string haslo;
@@ -137,7 +137,7 @@ void zmianaHasla(vector<Uzytkownik>&uzytkownicy,int idZalogowanegoUzytkownika) {
         }
     }
 }
-
+*/
 void wczytywanieKsiazkiAdresowej(vector <KsiazkaAdresowa>&adresaci) {
     KsiazkaAdresowa Dane;
     fstream plik;
@@ -493,8 +493,8 @@ int main() {
     //vector<Uzytkownik>uzytkownicy;
     vector <KsiazkaAdresowa>adresaci;
     int idZalogowanegoUzytkownika=0,liczbaZapisanychAdresow=0;
+    UsersInterface usersInterface;
     while(true) {
-        UsersInterface usersInterface;
         usersInterface.loadUsersFile();
         //wczytywanieUzytkownikow(uzytkownicy);
         int liczbaUzytkownikow;
@@ -558,7 +558,7 @@ int main() {
                 edytujKontakt(adresaci);
                 break;
             case '7':
-                zmianaHasla(uzytkownicy,idZalogowanegoUzytkownika);
+                usersInterface.passwordChange();
                 break;
             case '8':
                 idZalogowanegoUzytkownika=0;

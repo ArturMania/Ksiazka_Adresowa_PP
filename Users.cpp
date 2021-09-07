@@ -72,7 +72,7 @@ void UsersInterface::registration() {
     file.close();
 }
 
-int UsersInterface::login(){
+int UsersInterface::login() {
     int i=0;
     system ("cls");
     cout<<"Podaj login:";
@@ -96,5 +96,25 @@ int UsersInterface::login(){
     cout<<"Niepoprawny login!"<<endl;
     Sleep(1500);
     return 0;
+}
+
+void UsersInterface::passwordChange() {
+    system ("cls");
+    cout<<"Podaj nowe haslo: ";
+    cin>>password;
+    for(int i=0; i<users.size(); i++) {
+        if(users[i].userID==loggedUserId) {
+            users[i].password=password;
+            file.open("Uzytkownicy.txt",ios::out);
+            for(int i=0; i<users.size(); i++) {
+                file<<users[i].userID<<"|";
+                file<<users[i].name<<"|";
+                file<<users[i].password<<"|"<<endl;
+            }
+            file.close();
+            cout<<"Haslo zostalo zmienione"<<endl;
+            Sleep(1500);
+        }
+    }
 }
 
