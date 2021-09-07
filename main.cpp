@@ -5,17 +5,19 @@
 #include <vector>
 #include <sstream>
 #include <string>
+#include "Users.h"
 
 using namespace std;
-
-struct Uzytkownik {
-    int idUzytkownika;
-    string nazwa,haslo;
-};
 
 struct KsiazkaAdresowa {
     int id,idUzytkownikaKsiazkiAdresowej;
     string imie,nazwisko,nrtelefonu,email,adres;
+};
+
+/*struct Uzytkownik {
+    int idUzytkownika;
+    string nazwa,haslo;
+
 };
 
 int rejestracjaUzytkownika(vector<Uzytkownik>&uzytkownicy) {
@@ -113,7 +115,7 @@ int logowanieUzytkownika(vector<Uzytkownik>&uzytkownicy) {
     Sleep(1500);
     return 0;
 }
-
+*/
 void zmianaHasla(vector<Uzytkownik>&uzytkownicy,int idZalogowanegoUzytkownika) {
     system ("cls");
     string haslo;
@@ -488,11 +490,13 @@ void edytujKontakt(vector <KsiazkaAdresowa>&adresaci) {
 }
 
 int main() {
-    vector<Uzytkownik>uzytkownicy;
+    //vector<Uzytkownik>uzytkownicy;
     vector <KsiazkaAdresowa>adresaci;
     int idZalogowanegoUzytkownika=0,liczbaZapisanychAdresow=0;
     while(true) {
-        wczytywanieUzytkownikow(uzytkownicy);
+        UsersInterface usersInterface;
+        usersInterface.loadUsersFile();
+        //wczytywanieUzytkownikow(uzytkownicy);
         int liczbaUzytkownikow;
         char wybor;
         if(idZalogowanegoUzytkownika==0) {
@@ -506,10 +510,10 @@ int main() {
             cin>>wybor;
             switch(wybor) {
             case '1':
-                idZalogowanegoUzytkownika=logowanieUzytkownika(uzytkownicy);
+                idZalogowanegoUzytkownika=usersInterface.login();
                 break;
             case '2':
-                liczbaUzytkownikow=rejestracjaUzytkownika(uzytkownicy);
+                usersInterface.registration();
                 break;
             case '9':
                 cout<<"Do zobaczenia!"<<endl;
@@ -568,3 +572,5 @@ int main() {
     }
     return 0;
 }
+
+
